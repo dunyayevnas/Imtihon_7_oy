@@ -1,0 +1,163 @@
+{% load static %}
+<html class="no-js" lang="zxx" xmlns="http://www.w3.org/1999/html">
+    <head>
+         <style>
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+    background: url('https://wallbox.ru/resize/2560x1600/wallpapers/main2/201732/1502561450598f44aaccc176.46698383.jpg') no-repeat center center fixed;
+    background-size: cover;
+    padding: 0px;
+    min-height: 100vh; /* Background image will cover the entire viewport height */
+
+}
+
+ .login-form {
+                background: #f9f9f9;
+                padding: 20px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                width: 50%;
+                 justify-content: center;
+                align-items: center;
+                margin-left: 550px;
+                align-items: center;
+
+                }
+                          .login-title {
+                font-size: 24px;
+                margin-bottom: 20px;
+                text-align: center;
+                color: #000;
+            }
+
+.step-title {
+    font-size: 1.5em;
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+.step-title .step-number {
+    background-color: #E9D31E;
+    color: Black;
+    padding: 1px 10px;
+    border-radius: 100%;
+    margin-right: 50px;
+}
+
+.form-group {
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: center;
+    width: 100%; /* Kenglikni 100% ga kengaytirish */
+}
+
+.form-control {
+    width: 100%;
+    max-width: 600px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    margin:0  40px;
+}
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 50%;
+    font-size: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.pull-xs-right {
+    float: right;
+    width: 100%;
+}
+
+       </style>
+    </head>
+<!-- login-register31:27-->
+{% include 'layouts/head.html' %}
+    <body>
+    <!--[if lt IE 8]>
+		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+	<![endif]-->
+        <!-- Begin Body Wrapper -->
+        <div class="body-wrapper">
+            <!-- Begin Header Area -->
+           {% include 'layouts/header-base.html' %}
+
+            <!-- Header Area End Here -->
+            <!-- Begin Li's Breadcrumb Area -->
+            <div class="breadcrumb-area">
+                <div class="container">
+                    <div class="breadcrumb-content">
+                        <ul>
+                            <li><a href="{% url 'pages:home' %}">Home</a></li>
+                            <li class="active">Login</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <br>
+                        <div class="col-sm-12 col-md-12 col-lg-6 col-xs-12">
+                            <form action="{% url 'users:login' %}" method="post">
+                                {% csrf_token %}
+                                <div class="login-form">
+                                    <h4 class="login-title">Login</h4>
+                                    <div class="row">
+                                        <div class="col-md-12 mb-20">
+                                            <label>Username*</label>
+                                            <input name="username" class="mb-0" type="text" placeholder="Username">
+                                        </div>
+                                        <div class="col-md-6 mb-20">
+                                            <label>Password</label>
+                                            <input name="password1" class="mb-0" type="password" placeholder="Password">
+                                        </div>
+
+                                        <div class="col-12">
+                                            <button class="register-button mt-0" type="submit">Log In</button>
+                                        </div>
+                                    </div>
+                                    <a href="{% url 'users:register' %}">Forgot password ?</a>
+                                </div>
+                            </form>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Begin Footer Area -->
+            {% include 'layouts/footer.html' %}
+            <!-- Footer Area End Here -->
+        </div>
+                <script>
+                    document.querySelector('.img__btn').addEventListener('click', function() {
+                        document.querySelector('.cont').classList.toggle('s--signup');
+                    });
+                </script>
+        <!-- Body Wrapper End Here -->
+       {% include 'layouts/script.html' %}
+    </body>
+
+<!-- login-register31:27-->
+</html>

@@ -1,0 +1,106 @@
+{% load static %}
+{% load i18n %}
+<!-- login-register31:27-->
+{% include 'layouts/head.html' %}
+    <body>
+    <!--[if lt IE 8]>
+		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+	<![endif]-->
+        <!-- Begin Body Wrapper -->
+        <div class="body-wrapper">
+            <!-- Begin Header Area -->
+           {% include 'layouts/header-base.html' %}
+
+            <!-- Header Area End Here -->
+            <!-- Begin Li's Breadcrumb Area -->
+            <div class="breadcrumb-area">
+                <div class="container">
+                    <div class="breadcrumb-content">
+                        <ul>
+                            <li><a href="{% url 'pages:home' %}">{% trans 'Home' %}</a></li>
+                            <li class="active">{% trans 'My orders' %}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <br>
+<div id="wrapper-site">
+            <div class="container">
+                <div class="row">
+                    <div id="content-wrapper" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 onecol">
+                        <div id="main">
+                            <div id="content" class="page-content">
+                                <div id="mywishlist">
+                                    <h1 class="title-page" style="text-align:center;">{% trans 'My Orders' %}</h1>
+                                    <form method="post" class="std" id="customer-form">
+                                    <div id="block-history" class="block-center">
+                                        <table class="std table">
+                                            <thead>
+                                                <tr>
+                                                    <th class="first_item">{% trans 'Name' %}</th>
+                                                    <th class="item mywishlist_first">{% trans 'Qty' %}</th>
+                                                    <th class="item mywishlist_second">{% trans 'Created' %}</th>
+                                                    <th class="item mywishlist_second">{% trans 'Direct Link' %}</th>
+                                                    <th class="item mywishlist_second">{% trans 'Status' %}</th>
+                                                    <th class="last_item mywishlist_first">{% trans 'Delete' %}</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for ord in orders %}
+                                                <tr id="wishlist_1">
+                                                    <td>
+                                                        <a href="javascript:;" onclick="javascript:WishlistManage('block-order-detail', '1');">#{{ ord.id }}</a>
+                                                    </td>
+                                                    <td class="bold align_center">
+                                                        {{ ord.items.count }}
+                                                    </td>
+                                                    <td>{{ ord.created_at|date }}</td>
+                                                    <td>
+                                                        <a href="javascript:;" onclick="javascript:WishlistManage('block-order-detail', '1');">{% trans 'View' %}</a>
+                                                    </td>
+                                                    <td class="wishlist_default">
+                                                        <p class="is_wish_list_default">
+                                                            {% if ord.status %}
+                                                        <p style="color: green">{% trans 'Accepted' %}
+                                                            {% else %}
+                                                        <p style="color: red">{% trans 'Pending' %}
+                                                            {% endif %}
+                                                        <i class="icon icon-check-square"></i>
+                                                        </p>
+                                                    </td>
+                                                    <td class="wishlist_delete">
+                                                        <a href="javascript:;" onclick="return (WishlistDelete('wishlist_1', '1', 'Do you really want to delete this wishlist ?'));">{% trans 'Delete' %}</a>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </form>
+                                    </div>
+                                    <div class="page-home">
+                                        <a class="btn btn-default" href="{% url 'products:list' %}">
+                                            <i class="fa fa-home" aria-hidden="true"></i>
+                                            <span>{% trans 'Homepage' %}</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+             <!--Checkout Area End-->
+            <!-- Begin Footer Area -->
+           {% include 'layouts/footer.html' %}
+
+            <!-- Footer Area End Here -->
+        </div>
+        <!-- Body Wrapper End Here -->
+        <!-- jQuery-V1.12.4 -->
+       {% include 'layouts/script.html' %}
+
+    </body>
+
+<!-- checkout31:27-->
+</html>

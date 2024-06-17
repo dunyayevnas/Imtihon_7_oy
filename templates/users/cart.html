@@ -1,0 +1,108 @@
+{% load static %}
+{% load my_tags %}
+{% load i18n %}
+<!doctype html>
+<html class="no-js" lang="zxx">
+    
+<!-- shopping-cart31:32-->
+{% include 'layouts/head.html' %}
+    <body>
+    <!--[if lt IE 8]>
+		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+	<![endif]-->
+        <!-- Begin Body Wrapper -->
+        <div class="body-wrapper">
+            <!-- Begin Header Area -->
+            {% include 'layouts/header-base.html' %}
+            <!-- Header Area End Here -->
+            <!-- Begin Li's Breadcrumb Area -->
+            <div class="breadcrumb-area">
+                <div class="container">
+                    <div class="breadcrumb-content">
+                        <ul>
+                            <li><a href="{% url 'pages:home' %}">{% trans 'Home' %}</a></li>
+                            <li class="active">{% trans 'Shopping Cart' %}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Li's Breadcrumb Area End Here -->
+            <!--Shopping Cart Area Strat-->
+            <div class="Shopping-cart-area pt-60 pb-60">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <form action="#">
+                                <div class="table-content table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th class="li-product-remove">{% trans 'Remove' %}</th>
+                                                <th class="li-product-thumbnail">{% trans 'Images' %}</th>
+                                                <th class="cart-product-name">{% trans 'Product'%}</th>
+                                                <th class="li-product-quantity">{% trans 'Quantity' %}</th>
+                                                <th class="li-product-subtotal">{% trans 'Price' %}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for prod in products %}
+                                            <tr>
+                                                <td class="li-product-remove"><a href="{% url 'products:add_or_remove' pk=prod.id %}?next={{request.get_full_path|urlencode}}"><i class="fa fa-times"></i></a></td>
+                                                <td class="li-product-thumbnail"><a href="#"><img src="{{ prod.image.url }}" alt="Li's Product Image"></a></td>
+                                                <td class="li-product-name"><a href="#">{{ prod.title }}</a></td>
+                                                <td class="quantity">
+                                                    <label>{% trans 'Quantity' %}</label>
+                                                    <div class="cart-plus-minus">
+                                                        <input class="cart-plus-minus-box" value="1" type="text">
+                                                    </div>
+                                                </td>
+                                                <td class="product-subtotal"><span class="amount">{% if prod.is_discount %}
+                                                                        <span style="color:#14EF31;" class="price">${{ prod.get_price }} - </span>
+                                                                        <strike style="color:red;">{{ prod.price }}</strike>
+                                                                    {% else %}
+                                                                        <span class="price" style="color: #B714EF">{% trans 'No discount' %} - ${{ prod.price }}</span>
+                                                                    {% endif %} x {{ prod.count }}</span></td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                 <div class="row">
+                                    <div class="col-md-5 ml-auto">
+                                        <div class="cart-page-total">
+                                            <h2>{% trans 'Cart totals' %}</h2>
+                                            <ul>
+                                                <li>Total <span>${{ request|get_cart_total }}</span></li>
+                                            </ul>
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="coupon-all">
+                                                        <div class="minicart-button">
+                                                            <a href="{% url 'orders:checkout' %}" class="li-button li-button-fullwidth li-button-dark">
+                                                                <span>{% trans 'Checkout' %}</span>
+                                                            </a>
+                                                            <br>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Shopping Cart Area End-->
+            <!-- Begin Footer Area -->
+       {% include 'layouts/footer.html' %}
+
+            <!-- Footer Area End Here -->
+        </div>
+        <!-- Body Wrapper End Here -->
+        <!-- jQuery-V1.12.4 -->
+       {% include 'layouts/script.html' %}
+    </body>
+
+<!-- shopping-cart31:32-->
+</html>

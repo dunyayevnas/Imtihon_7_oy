@@ -1,0 +1,169 @@
+{% load static %}
+{% load i18n %}
+<!doctype html>
+<html class="no-js" lang="zxx">
+    
+<!-- blog-details-left-sidebar31:56-->
+{% include 'layouts/head.html' %}
+    <body>
+    <!--[if lt IE 8]>
+		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+	<![endif]-->
+        <!-- Begin Body Wrapper -->
+        <div class="body-wrapper">
+            <!-- Begin Header Area -->
+            {% include 'layouts/header-base.html' %}
+            <!-- Header Area End Here -->
+            <!-- Begin Li's Breadcrumb Area -->
+            <div class="breadcrumb-area">
+                <div class="container">
+                    <div class="breadcrumb-content">
+                        <ul>
+                            <li><a href="{% url 'pages:home' %}">{% trans 'Home' %}</a></li>
+                            <li class="active">{% trans 'Blog Details' %}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Li's Breadcrumb Area End Here -->
+            <!-- Begin Li's Main Blog Page Area -->
+            <div class="li-main-blog-page li-main-blog-details-page pt-60 pb-60 pb-sm-45 pb-xs-45">
+                <div class="container">
+                    <div class="row">
+                        <!-- Begin Li's Blog Sidebar Area -->
+                        <div class="col-lg-3 order-lg-1 order-2">
+                            <div class="li-blog-sidebar-wrapper">
+                                <div class="li-blog-sidebar pt-25">
+                                    <h4 class="li-blog-sidebar-title">{% trans 'Categories' %}</h4>
+                                    {% for cat in category %}
+                                    <ul class="li-blog-archive">
+                                        <li><a href="../../?cat={{ cat.id }}" title="Show products matching tag Hot Trend">{{ cat.name }}</a></li>
+                                    </ul>
+                                    {% endfor %}
+                                </div>
+                                 <h4 class="li-blog-sidebar-title">{% trans 'Recent Post' %}</h4>
+                                    {% for blogs in famous_blogs %}
+                                    <div class="li-recent-post pb-30">
+                                        <div class="li-recent-post-thumb">
+                                            <a href="{% url 'blogs:detail' pk=blogs.id%}">
+                                                <img class="img-full" src="{{ blogs.image.url }}" alt="Li's Product Image">
+                                            </a>
+                                        </div>
+                                        <div class="li-recent-post-des">
+                                            <span><a href="{% url 'blogs:detail' pk=blogs.id%}">{{ blogs.title }} |</a></span>
+                                            <span class="li-post-date">{{ blogs.created_at|date}}</span>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                <div class="li-blog-sidebar">
+                                    <h4 class="li-blog-sidebar-title">{% trans 'Tags' %}</h4>
+                                    {% for tag in tags %}
+                                    <ul class="li-blog-tags">
+                                        <li><a href="../../?tag={{ tag.id }}" title="Show products matching tag Hot Trend">{{ tag.name }}</a></li>
+                                    </ul>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Li's Blog Sidebar Area End Here -->
+                        <!-- Begin Li's Main Content Area -->
+                        <div class="col-lg-9 order-lg-2 order-1">
+                            <div class="row li-main-content">
+                                <div class="col-lg-12">
+                                    <div class="li-blog-single-item pb-30">
+                                        <div class="li-blog-banner">
+                                            <a href="blog-detail.html"><img class="img-full" src="{{ blog.image.url}}" alt=""></a>
+                                        </div>
+                                        <div class="li-blog-content">
+                                            <div class="li-blog-details">
+                                                <h3 class="li-blog-heading pt-25"><a href="#">{{ blog.title }}</a></h3>
+                                                <div class="li-blog-meta">
+                                                    <a class="author" href="#"><i class="fa fa-user"></i>{{ blog.author }}</a>
+                                                    <a class="post-time" href="#"><i class="fa fa-calendar"></i>{{ blog.created_at|date}}</a>
+                                                </div>
+                                                <p>{{blog.content}}</p>
+                                                <!-- Begin Blog Blockquote Area -->
+                                                <div class="li-blog-blockquote">
+                                                    <blockquote>
+                                                        <p>{{ blog.short_info }}</p>
+                                                    </blockquote>
+                                                </div>
+                                                <!-- Blog Blockquote Area End Here -->
+                                                <div class="li-tag-line">
+                                                    <h4>{% trans 'tag' %}:</h4>
+                                                    {% for tag in tags %}
+                                                    <a href="#">{{ tag.name }}</a>,
+                                                    {% endfor %}
+                                                </div>
+                                                <div class="li-blog-sharing text-center pt-30">
+                                                    <h4>{% trans 'share this post' %}:</h4>
+                                                    <a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a>
+                                                    <a href="https://www.twitter.com/"><i class="fa fa-twitter"></i></a>
+                                                    <a href="https://www.pinterest.com/"><i class="fa fa-pinterest"></i></a>
+                                                    <a href="https://www.google.com/"><i class="fa fa-google-plus"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Begin Li's Blog Comment Section -->
+                                    <div class="li-comment-section">
+                                        <h3>{{ comments.count }} {% trans 'comment' %}</h3>
+                                        <ul>
+                                            <li>
+                                                {% for comment in comments %}
+                                                <div class="author-avatar pt-15">
+                                                    <img src="{%static 'images/product-details/admin.png '%}" alt="User">
+                                                </div>
+                                                <div class="comment-body pl-15">
+                                                    <h5 class="comment-author pt-15">{{ comment.user.username }}</h5>
+                                                    <div class="comment-post-date">
+                                                        {{ comment.created_at|date }}
+                                                    </div>
+                                                    <p>
+                                                        {{comment.message}}
+                                                    </p>
+                                                </div>
+                                                {% endfor %}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!-- Li's Blog Comment Section End Here -->
+                                    <!-- Begin Blog comment Box Area -->
+                                    <div class="li-blog-comment-wrapper">
+                                        <form method="post" action="{% url 'blogs:comment' pk=blog.id %}?next={{ request.get_full_path|urlencode }}">
+                                            {% csrf_token %}
+                                            <div class="comment-post-box">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <label>{% trans 'comment' %}</label>
+                                                        <textarea name="message" placeholder="{% trans 'message' %}"></textarea>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="coment-btn pt-30 pb-sm-30 pb-xs-30 f-left">
+                                                            <input class="li-btn-2" type="submit" name="submit" value="{% trans 'Send message' %}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <!-- Blog comment Box Area End Here -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Li's Main Content Area End Here -->
+                    </div>
+                </div>
+            </div>
+            <!-- Li's Main Blog Page Area End Here -->
+            <!-- Begin Footer Area -->
+            {% include 'layouts/footer.html' %}
+            <!-- Footer Area End Here -->
+        </div>
+        <!-- Body Wrapper End Here -->
+        <!-- jQuery-V1.12.4 -->
+       {% include 'layouts/script.html' %}
+    </body>
+
+<!-- blog-details-left-sidebar32:00-->
+</html>

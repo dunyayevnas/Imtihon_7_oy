@@ -1,0 +1,277 @@
+{% load static %}
+{% load i18n %}
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<!-- index28:48-->
+ {% include 'layouts/head.html' %}
+    <body>
+    <!--[if lt IE 8]>
+		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+	<![endif]-->
+        <!-- Begin Body Wrapper -->
+        <div class="body-wrapper">
+            <!-- Begin Header Area -->
+             {% include 'layouts/header-base.html' %}
+            <!-- Header Area End Here -->
+            <!-- Begin Slider With Banner Area -->
+            <div class="slider-with-banner">
+                <div class="container">
+                    <div class="row">
+                        <!-- Begin Slider Area -->
+                        <div class="col-lg-8 col-md-8">
+                            <div class="slider-area">
+                                <div class="slider-active owl-carousel">
+                                    <!-- Begin Single Slide Area -->
+                                    <div class="single-slide align-center-left  animation-style-01 bg-1">
+                                        <div class="slider-progress"></div>
+                                        <div class="slider-content">
+                                            <h5>{% trans 'Sale Offer' %} <span>-20% </span> {% trans 'This Week' %}</h5>
+                                            <h2> Galaxy S9 | S9+</h2>
+                                            <h3>{% trans 'Starting at' %} <span>$1209.00</span></h3>
+                                            <div class="default-btn slide-btn">
+                                                <a class="links" href="{% url 'products:list' %}">{% trans 'Shopping Now' %}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Single Slide Area End Here -->
+                                    <!-- Begin Single Slide Area -->
+                                    <div class="single-slide align-center-left animation-style-02 bg-2">
+                                        <div class="slider-progress"></div>
+                                        <div class="slider-content">
+                                            <h5>{% trans 'Sale Offer'%} <span>{% trans 'Black Friday' %}</span> {% trans 'This Week' %}</h5>
+                                            <h2>{% trans 'Work Desk Surface Studio' %} 2018</h2>
+                                            <h3>{% trans 'Starting at'%} <span>$824.00</span></h3>
+                                            <div class="default-btn slide-btn">
+                                                <a class="links" href="{% url 'products:list' %}">{% trans 'Shopping Now' %}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Single Slide Area End Here -->
+                                    <!-- Begin Single Slide Area -->
+                                    <div class="single-slide align-center-left animation-style-01 bg-3">
+                                        <div class="slider-progress"></div>
+                                        <div class="slider-content">
+                                            <h5>{% trans 'Sale Offer' %} <span>-10% Off</span> {%trans 'This Week'%}</h5>
+                                            <h2>{% trans 'Phantom 4 Pro+ Obsidian' %}</h2>
+                                            <h3>{%trans 'Starting at'%} <span>$1849.00</span></h3>
+                                            <div class="default-btn slide-btn">
+                                                <a class="links" href="{% url 'products:list' %}">{% trans 'Shopping Now' %}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Single Slide Area End Here -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Begin Li Banner Area -->
+                        <div class="col-lg-4 col-md-4 text-center pt-xs-30">
+                            <div class="li-banner">
+                                <a href="{% url 'products:list' %}">
+                                    <img src="{%static 'images/banner/1_1.jpg '%}" alt="">
+                                </a>
+                            </div>
+                            <div class="li-banner mt-15 mt-sm-30 mt-xs-30">
+                                <a href="{% url 'products:list' %}">
+                                    <img src="{%static 'images/banner/1_2.jpg '%}" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <!-- Li Banner Area End Here -->
+                    </div>
+                </div>
+            </div>
+            <!-- Slider With Banner Area End Here -->
+            <!-- Begin Product Area -->
+            <br>
+            <section class="product-area li-laptop-product li-trendding-products best-sellers pb-45">
+                <div class="container">
+                    <div class="row">
+                        <!-- Begin Li's Section Area -->
+                        <div class="col-lg-12">
+                            <div class="li-section-title">
+                                <h2>
+                                    <span>{% trans 'Best sellers' %}</span>
+                                </h2>
+                            </div>
+                            <div class="row">
+                                <div class="product-active owl-carousel">
+                                    {% for best in Best_Seller %}
+                                        <div class="col-lg-12">
+                                        <!-- single-product-wrap start -->
+                                        <div class="single-product-wrap">
+                                            <div class="product-image">
+                                                <a href="{% url 'products:list' %}">
+                                                    <img src="{{best.image.url}}" alt="Li's Product Image">
+                                                </a>
+                                                <span class="sticker">{% trans 'New' %}</span>
+                                            </div>
+                                            <div class="product_desc">
+                                                <div class="product_desc_info">
+                                                    <div class="product-review">
+                                                        <h5 class="manufacturer">
+                                                            <a href="{% url 'products:list' %}">{{ best.brand }}</a>
+                                                        </h5>
+                                                    </div>
+                                                    <h4><a class="product_name" href="{% url 'products:list' %}">{{ best.name }}</a></h4>
+                                                    <div class="price-box">
+                                                        <span class="new-price">{% if best.is_discount %}
+                                                                        <span style="color:#14EF31;" class="price">${{ best.get_price }} - </span>
+                                                                        <strike style="color:red;">{{ best.price }}</strike>
+                                                                    {% else %}
+                                                                        <span class="price" style="color: #B714EF">{% trans 'No discount '%}- ${{ best.price }}</span>
+                                                                    {% endif %}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="add-actions">
+                                                    <ul class="add-actions-link">
+                                                        <li class="add-cart active"><a href="{% url 'products:add_or_remove' pk=best.id %}?next={{request.get_full_path|urlencode}}">{% trans 'Add to cart' %}</a></li>
+                                                        <li><a class="links-details" href="{% url 'products:add_or_remov' pk=best.id %}?next={{request.get_full_path|urlencode}}"><i class="fa fa-heart-o"></i></a></li>
+                                                        <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- single-product-wrap end -->
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Li's Section Area End Here -->
+                    </div>
+                </div>
+            </section>
+            <!-- Product Area End Here -->
+            <!-- Begin Li's Static Banner Area -->
+            <br>
+            <br>
+            <div class="li-static-banner">
+                <div class="container">
+                    <div class="row">
+                        <!-- Begin Single Banner Area -->
+                        <div class="col-lg-4 col-md-4 text-center">
+                            <div class="single-banner">
+                                <a href="{% url 'products:list' %}">
+                                    <img src="{%static 'images/banner/1_3.jpg '%}" alt="Li's Static Banner">
+                                </a>
+                            </div>
+                        </div>
+                        <!-- Single Banner Area End Here -->
+                        <!-- Begin Single Banner Area -->
+                        <div class="col-lg-4 col-md-4 text-center pt-xs-30">
+                            <div class="single-banner">
+                                <a href="{% url 'products:list' %}">
+                                    <img src="{%static 'images/banner/1_4.jpg '%}" alt="Li's Static Banner">
+                                </a>
+                            </div>
+                        </div>
+                        <!-- Single Banner Area End Here -->
+                        <!-- Begin Single Banner Area -->
+                        <div class="col-lg-4 col-md-4 text-center pt-xs-30">
+                            <div class="single-banner">
+                                <a href="{% url 'products:list' %}">
+                                    <img src="{%static 'images/banner/1_5.jpg '%}" alt="Li's Static Banner">
+                                </a>
+                            </div>
+                        </div>
+                        <!-- Single Banner Area End Here -->
+                    </div>
+                </div>
+            </div>
+           <br>
+            <section class="product-area li-laptop-product li-tv-audio-product pb-45">
+                <div class="container">
+                    <div class="row">
+                        <!-- Begin Li's Section Area -->
+                        <div class="col-lg-12">
+                            <div class="li-section-title">
+                                <h2>
+                                    <span>{% trans 'TOP Products' %}</span>
+                                </h2>
+                            </div>
+                            <div class="row">
+                                <div class="product-active owl-carousel">
+                                    {% for t in Tops %}
+                                    <div class="col-lg-12">
+                                        <!-- single-product-wrap start -->
+                                        <div class="single-product-wrap">
+                                            <div class="product-image">
+                                                <a href="{% url 'products:list' %}">
+                                                    <img src="{{ t.image.url }}" alt="Li's Product Image">
+                                                </a>
+                                                <span class="sticker">{%trans 'New' %}</span>
+                                            </div>
+                                            <div class="product_desc">
+                                                <div class="product_desc_info">
+                                                    <div class="product-review">
+                                                        <h5 class="manufacturer">
+                                                            <a href="{% url 'products:list' %}">{{ t.brand }}</a>
+                                                        </h5>
+                                                    </div>
+                                                    <h4><a class="product_name" href="{% url 'products:list' %}">{{ t.name }}</a></h4>
+                                                    <div class="price-box">
+                                                        <span class="new-price">{% if t.is_discount %}
+                                                                        <span style="color:#14EF31;" class="price">${{ t.get_price }} - </span>
+                                                                        <strike style="color:red;">{{ t.price }}</strike>
+                                                                    {% else %}
+                                                                        <span class="price" style="color: #B714EF">{% trans 'No discount'%} - ${{ t.price }}</span>
+                                                                    {% endif %}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="add-actions">
+                                                    <ul class="add-actions-link">
+                                                        <li class="add-cart active"><a href="{% url 'products:add_or_remove' pk=t.id %}?next={{request.get_full_path|urlencode}}">{% trans 'Add to cart' %}</a></li>
+                                                        <li><a class="links-details" href="{% url 'products:add_or_remov' pk=t.id %}?next={{request.get_full_path|urlencode}}"><i class="fa fa-heart-o"></i></a></li>
+                                                        <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- single-product-wrap end -->
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Li's Section Area End Here -->
+                    </div>
+                </div>
+            </section>
+            <br>
+            <br>
+            <div class="li-static-home">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <!-- Begin Li's Static Home Image Area -->
+                            <div class="li-static-home-image"></div>
+                            <!-- Li's Static Home Image Area End Here -->
+                            <!-- Begin Li's Static Home Content Area -->
+                            <div class="li-static-home-content">
+                                <p>{% trans 'Sale Offer' %}<span>-20% </span>{% trans 'This Week' %}</p>
+                                <h2>{% trans 'Featured Product' %}</h2>
+                                <h2>{% trans 'Meito Accessories' %} 2018</h2>
+                                <p class="schedule">
+                                    {% trans 'Starting at' %}
+                                    <span> $1209.00</span>
+                                </p>
+                                <div class="default-btn">
+                                    <a href="{% url 'products:list' %}" class="links">{% trans 'Shopping Now' %}</a>
+                                </div>
+                            </div>
+                            <!-- Li's Static Home Content Area End Here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+          <br>
+            {% include 'layouts/footer.html' %}
+        </div>
+        <!-- Body Wrapper End Here -->
+        <!-- jQuery-V1.12.4 -->
+        {% include 'layouts/script.html' %}
+    </body>
+
+<!-- index30:23-->
+</html>

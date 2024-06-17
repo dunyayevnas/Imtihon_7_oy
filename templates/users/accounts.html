@@ -1,0 +1,132 @@
+{% load static %}
+{% load i18n %}
+<!doctype html>
+<html class="no-js" lang="zxx">
+<head>
+    <style>
+           *,
+                *:before,
+                *:after {
+                    box-sizing: border-box;
+                    margin: 0;
+                    padding: 0;
+                }
+
+                body {
+                    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+                     background:url('https://wallbox.ru/resize/2560x1600/wallpapers/main2/201732/1502561450598f44aaccc176.46698383.jpg');
+                     height: 100px;
+
+                     background-size: cover;
+
+                    }
+
+                .register-form {
+                    background-color: #f9f9f9;
+                    padding: 20px;
+                    border-radius: 10px;
+                     margin: 20px auto;  /* tepa va pastda 20px bo'sh joy qoldirish */
+                    max-width: 500px;   /* maksimal kenglik */
+                    width: 100%;
+                }
+
+                .title-page {
+                    margin-bottom: 10px;
+                }
+
+    </style>
+</head>
+<!-- shop-list-left-sidebar31:48-->
+{% include 'layouts/head.html' %}
+    <body>
+    <!--[if lt IE 8]>
+		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+	<![endif]-->
+        <!-- Begin Body Wrapper -->
+        <div class="body-wrapper">
+            <!-- Begin Header Area -->
+            {% include 'layouts/header-base.html' %}
+            <!-- Header Area End Here -->
+            <!-- Begin Li's Breadcrumb Area -->
+            <div class="breadcrumb-area">
+                <div class="container">
+                    <div class="breadcrumb-content">
+                        <ul>
+                            <li><a href="{% url 'pages:home' %}">{% trans 'Home' %}</a></li>
+                            <li class="active">{% trans 'Account' %} </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+<div id="wrapper-site">
+            <div class="container">
+                <div class="row">
+                    <div id="content-wrapper" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 onecol">
+                        <div id="main">
+                            <div id="content" class="page-content">
+                                <div class="register-form text-center">
+                                    <h3 class="text-center title-page">{% trans 'Updated Account' %}</h3>
+                                    {% if messages %}
+                                        {% for error in messages %}
+                                            <h6 style="color: red">{{ error }}</h6>
+                                        {% endfor %}
+                                    {% endif %}
+                                    <form action="{% url 'users:accounts' %}" id="customer-form" class="js-customer-form" method="post">
+                                        {% csrf_token %}
+                                        <div>
+                                            <div class="form-group">
+                                                <div>
+                                                    <input style="text-align: center" value="{{ account.full_name }}" class="form-control" name="full_name" type="text" placeholder="{% trans 'Full name' %}">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div>
+                                                    <input style="text-align: center" value="{{ account.city }}" class="form-control" name="city" type="text" placeholder="{% trans ' City' %}">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div>
+                                                    <input style="text-align: center" value="{{ account.phone }}" class="form-control" name="phone" type="text" placeholder="{% trans 'Phone' %}">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div>
+                                                    <input style="text-align: center" value="{{ account.address }}" class="form-control" name="address" type="text" placeholder="{% trans 'Address' %}">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div>
+                                                    <input style="text-align: center" value="{{ account.company }}" class="form-control" name="company" type="text" placeholder="{% trans 'Company' %}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix">
+                                            <div>
+                                                <button class="btn btn-primary" data-link-action="sign-in" type="submit">
+                                                   {% trans 'Updated Account' %}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+ <!-- Content Wraper Area End Here -->
+            <!-- Begin Footer Area -->
+            {% include 'layouts/footer.html' %}
+            <!-- Footer Area End Here -->
+            <!-- Begin Quick View | Modal Area -->
+            <!-- Quick View | Modal Area End Here -->
+        </div>
+        <!-- Body Wrapper End Here -->
+        <!-- jQuery-V1.12.4 -->
+       {% include 'layouts/script.html' %}
+    </body>
+
+<!-- shop-list-left-sidebar31:48-->
+</html>

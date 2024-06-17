@@ -1,0 +1,218 @@
+{% load static %}
+{% load i18n %}
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<!-- single-product31:30-->
+{% include 'layouts/head.html' %}
+    <body>
+    <!--[if lt IE 8]>
+		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+	<![endif]-->
+        <!-- Begin Body Wrapper -->
+        <div class="body-wrapper">
+            <!-- Begin Header Area -->
+           {% include 'layouts/header-base.html' %}
+
+            <!-- Header Area End Here -->
+            <!-- Begin Li's Breadcrumb Area -->
+            <div class="breadcrumb-area">
+                <div class="container">
+                    <div class="breadcrumb-content">
+                        <ul>
+                            <li><a href="{% url 'pages:home' %}">{% trans 'Home' %}</a></li>
+                            <li class="active">{% trans 'Product Details' %}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Li's Breadcrumb Area End Here -->
+            <!-- content-wraper start -->
+            <div class="content-wraper">
+                <div class="container">
+                    <div class="row single-product-area">
+                        <div class="col-lg-5 col-md-6">
+                           <!-- Product Details Left -->
+                            <div class="product-details-left">
+                                        <div class="product-details-images slider-navigation-1">
+                                            <div class="lg-image">
+                                                <a class="popup-img venobox vbox-item" href="{% url 'products:detail' pk=products.id %}" data-gall="myGallery">
+                                                    <img src="{{ products.image.url }}" alt="product image">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="product-details-thumbs slider-thumbs-1">
+                                            {% for image in product %}
+                                                <div class="sm-image"><img src="{{ image.image.url }}" alt="product image thumb"></div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                            <!--// Product Details Left -->
+                        </div>
+                        <div class="col-lg-7 col-md-6">
+                            <div class="product-details-view-content pt-60">
+                                <div class="product-info">
+                                    <h2>{{ products.title }}</h2>
+                                    <span class="product-details-ref">{% trans 'Reference' %}: {{ products.author }}</span>
+                                    <div class="price-box pt-20">
+                                         {% if products.is_discount %}
+                                            <span style="color:#14EF31;" class="price">${{ products.get_price }} - </span>
+                                            <strike style="color:red;">{{ products.price }}</strike>
+                                        {% else %}
+                                            <span class="price" style="color: #B714EF">{% trans 'No discount' %} - ${{ products.price }}</span>
+                                        {% endif %}
+                                    </div>
+                                    <div class="product-desc">
+                                        <p>
+                                            <span>{{ products.short_info }}
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div class="product-variants">
+                                        <div class="produt-variants-size">
+                                            <label>{% trans 'Dimension' %}</label>
+                                            <select class="nice-select">
+                                                {% for size in products.sizes.all %}
+                                                <option value="1" title="S" selected="selected">{{ size.name }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="single-add-to-cart">
+                                        <form action="#" class="cart-quantity">
+                                            <div class="quantity">
+                                                <label>{% trans 'Quantity' %}</label>
+                                                <div class="cart-plus-minus">
+                                                    <input class="cart-plus-minus-box" value="1" type="text">
+                                                </div>
+                                            </div>
+                                            <button class="add-to-cart" type="submit"><a href="{% url 'products:add_or_remove' pk=products.id %}?next={{request.get_full_path|urlencode}}">{% trans 'add to cart' %}</a></button>
+                                        </form>
+                                    </div>
+                                    <div class="product-additional-info pt-25">
+                                        <a class="wishlist-btn" href="{% url 'products:add_or_remov' pk=products.id %}?next={{request.get_full_path|urlencode}}"><i class="fa fa-heart-o"></i>{% trans 'Add to wishlist' %}</a>
+                                        <div class="product-social-sharing pt-25">
+                                            <ul>
+                                                <li class="facebook"><a href="https://www.facebook.com/"><i class="fa fa-facebook"></i>Facebook</a></li>
+                                                <li class="twitter"><a href="https://www.twitter.com/"><i class="fa fa-twitter"></i>Twitter</a></li>
+                                                <li class="google-plus"><a href="https://www.google.com/"><i class="fa fa-google-plus"></i>Google +</a></li>
+                                                <li class="instagram"><a href="https://www.instagram.com/"><i class="fa fa-instagram"></i>Instagram</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <!-- content-wraper end -->
+            <!-- Begin Product Area -->
+            <div class="product-area pt-35">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="li-product-tab">
+                                <ul class="nav li-product-menu">
+                                   <li><a class="active" data-toggle="tab" href="#description"><span>{% trans 'Description' %}</span></a></li>
+                                   <li><a data-toggle="tab" href="#product-details"><span>{% trans 'Product Details' %}</span></a></li>
+                                </ul>               
+                            </div>
+                            <!-- Begin Li's Tab Menu Content Area -->
+                        </div>
+                    </div>
+                    <div class="tab-content">
+                        <div id="description" class="tab-pane active show" role="tabpanel">
+                            <div class="product-description">
+                                    <span>{{products.short_info}}</span>
+                            </div>
+                        </div>
+                        <div id="product-details" class="tab-pane" role="tabpanel">
+                            <div class="product-details-manufacturer">
+                                <a href="#">
+                                    <img src="{%static 'images/product-details/admin.png' %}" alt="Product Manufacturer Image">
+                                </a>
+                                <p><span>{% trans 'Reference' %}</span>- {{ products.author }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Product Area End Here -->
+            <!-- Begin Li's Laptop Product Area -->
+            <section class="product-area li-laptop-product pt-30 pb-50">
+                <div class="container">
+                    <div class="row">
+                        <!-- Begin Li's Section Area -->
+                        <div class="col-lg-12">
+                            <div class="li-section-title">
+                                <h2>
+                                    <span>{{ product.count }} - {% trans 'other products in the same category' %}:</span>
+                                </h2>
+                            </div>
+                            <div class="row">
+                                <div class="product-active owl-carousel">
+                                    {% for prod in product %}
+                                    <div class="col-lg-12">
+                                        <!-- single-product-wrap start -->
+                                        <div class="single-product-wrap">
+                                            <div class="product-image">
+                                                <a href="{% url 'products:detail' pk=prod.id %}">
+                                                    <img src="{{ prod.image.url }}" alt="Li's Product Image">
+                                                </a>
+                                                <span class="sticker">{% trans 'New' %}</span>
+                                            </div>
+                                            <div class="product_desc">
+                                                <div class="product_desc_info">
+                                                    <div class="product-review">
+                                                        <h5 class="manufacturer">
+                                                            <a href="product-details.html">{{ prod.brand }}</a>
+                                                        </h5>
+                                                    </div>
+                                                    <h4><a class="product_name" href="product-detail.html">{{ prod.title }}</a></h4>
+                                                    <div class="price-box">
+                                                        {% if prod.is_discount %}
+                                                                        <span style="color:#14EF31;" class="price">${{ prod.get_price }} - </span>
+                                                                        <strike style="color:red;">{{ prod.price }}</strike>
+                                                                    {% else %}
+                                                                        <span class="price" style="color: #B714EF">{% trans 'No discount' %} - ${{ prod.price }}</span>
+                                                                    {% endif %}
+                                                    </div>
+                                                </div>
+                                                <div class="add-actions">
+                                                    <ul class="add-actions-link">
+                                                        <li class="add-cart active"><a href="{% url 'products:add_or_remove' pk=products.id %}?next={{request.get_full_path|urlencode}}">{% trans 'Add to cart' %}</a></li>
+                                                        <li><a href="{% url 'products:add_or_remov' pk=products.id %}?next={{request.get_full_path|urlencode}}" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
+                                                        <li><a class="links-details" href="{% url 'products:add_or_remov' pk=products.id %}?next={{request.get_full_path|urlencode}}"><i class="fa fa-heart-o"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- single-product-wrap end -->
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Li's Section Area End Here -->
+                    </div>
+                </div>
+            </section>
+            <!-- Li's Laptop Product Area End Here -->
+            <!-- Begin Footer Area -->
+            {% include 'layouts/footer.html' %}
+
+            <!-- Footer Area End Here -->
+            <!-- Begin Quick View | Modal Area -->
+
+        </div>
+        <!-- Body Wrapper End Here -->
+        <!-- jQuery-V1.12.4 -->
+       {% include 'layouts/script.html' %}
+
+    </body>
+
+<!-- single-product31:32-->
+</html>

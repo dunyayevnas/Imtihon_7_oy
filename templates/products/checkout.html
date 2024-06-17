@@ -1,0 +1,196 @@
+{% load static %}
+{% load i18n %}
+<!doctype html>
+<html class="no-js" lang="zxx">
+    <head>
+       <style>
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+    background: url('https://wallbox.ru/resize/2560x1600/wallpapers/main2/201732/1502561450598f44aaccc176.46698383.jpg') no-repeat center center fixed;
+    background-size: cover;
+    padding: 0px;
+    min-height: 100vh; /* Background image will cover the entire viewport height */
+
+}
+
+#wrapper-site {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50vh;
+    width: 100%;
+
+}
+
+
+
+.cart-grid {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center
+}
+
+.check-info {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+     width: 100%;
+}
+
+.checkout-personal-step {
+    margin-bottom: 20px;
+}
+
+.step-title {
+    font-size: 1.5em;
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+.step-title .step-number {
+    background-color: #E9D31E;
+    color: Black;
+    padding: 1px 10px;
+    border-radius: 100%;
+    margin-right: 50px;
+}
+
+.form-group {
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: center;
+    width: 100%; /* Kenglikni 100% ga kengaytirish */
+}
+
+.form-control {
+    width: 100%;
+    max-width: 600px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    margin:0  40px;
+}
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 50%;
+    font-size: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.pull-xs-right {
+    float: right;
+    width: 100%;
+}
+
+       </style>
+    </head>
+<!-- checkout31:27-->
+{% include 'layouts/head.html' %}
+    <body>
+    <!--[if lt IE 8]>
+		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+	<![endif]-->
+        <!-- Begin Body Wrapper -->
+        <div class="body-wrapper">
+            <!-- Begin Header Area -->
+            {% include 'layouts/header-base.html' %}
+
+            <!-- Header Area End Here -->
+            <!-- Begin Li's Breadcrumb Area -->
+            <div class="breadcrumb-area">
+                <div class="container">
+                    <div class="breadcrumb-content">
+                        <ul>
+                            <li><a href="{% url 'pages:home' %}">{% trans 'Home' %}</a></li>
+                            <li class="active">{% trans 'Checkout' %}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Li's Breadcrumb Area End Here -->
+            <!--Checkout Area Strat-->
+            <div id="wrapper-site">
+                <div class="container">
+                    <div class="row">
+                        <div id="content-wrapper" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 onecol">
+                            <div id="main">
+                                <div class="cart-grid row">
+                                    <div class="col-md-9 check-info">
+                                        <div class="checkout-personal-step">
+                                            <h3 class="step-title h3 info">
+                                                <span class="step-number">1</span>{% trans 'PERSONAL INFORMATION' %}
+                                            </h3>
+                                        </div>
+                                        <div class="content">
+                                            <ul class="nav nav-inline">
+                                            </ul>
+                                            <div class="tab-content">
+                                                <div class="tab-pane fade in active show" id="checkout-guest-form" role="tabpanel">
+                                                    <form action="{% url 'orders:order' %}" id="customer-form" class="js-customer-form" method="post">
+                                                        {% csrf_token %}
+                                                        <div>
+                                                            <div class="form-group row">
+                                                                <input class="form-control" name="address" type="text" placeholder="{% trans 'Address' %}">
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <input class="form-control" name="phone" type="text" placeholder="{% trans 'Phone' %}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="clearfix">
+                                                            <div class="row">
+                                                                <input type="hidden" name="submitCreate" value="1">
+
+                                                                <button class="continue btn btn-primary pull-xs-right" name="continue" data-link-action="register-new-customer" type="submit"
+                                                                    value="1">
+                                                                    {% trans 'Continue' %}
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Checkout Area End-->
+            <!-- Begin Footer Area -->
+           {% include 'layouts/footer.html' %}
+
+            <!-- Footer Area End Here -->
+        </div>
+        <!-- Body Wrapper End Here -->
+        <!-- jQuery-V1.12.4 -->
+       {% include 'layouts/script.html' %}
+
+    </body>
+
+<!-- checkout31:27-->
+</html>

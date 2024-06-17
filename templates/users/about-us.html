@@ -1,0 +1,177 @@
+{% load static %}
+{% load i18n %}
+<!doctype html>
+<html class="no-js" lang="zxx">
+    
+<!-- about-us32:04-->
+{% include 'layouts/head.html' %}
+    <body>
+    <!--[if lt IE 8]>
+		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+	<![endif]-->
+        <!-- Begin Body Wrapper -->
+        <div class="body-wrapper">
+            <!-- Begin Header Area -->
+            {% include 'layouts/header-base.html' %}
+            <!-- Header Area End Here -->
+            <!-- Begin Li's Breadcrumb Area -->
+            <div class="breadcrumb-area">
+                <div class="container">
+                    <div class="breadcrumb-content">
+                        <ul>
+                            <li><a href="{% url 'pages:home' %}">{% trans 'Home' %}</a></li>
+                            <li class="active">{% trans 'About Us' %}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Li's Breadcrumb Area End Here -->
+            <!-- about wrapper start -->
+            <div class="about-us-wrapper pt-60 pb-40">
+                <div class="container">
+                    <div class="row">
+                        <!-- About Text Start -->
+                        <div class="col-lg-6 order-last order-lg-first">
+                            <div class="about-text-wrap">
+                                <h2><span>{% trans 'Provide Best' %}</span>{% trans 'Product For You' %}</h2>
+                                <p>{% trans 'We provide the best Beard oile all over the world. We are the worldd best store in indi for Beard Oil. You can buy our product without any hegitation because they truste us and buy our product without any hagitation because they belive and always happy buy our product.' %}</p>
+                                <p>{% trans 'Some of our customer say’s that they trust us and buy our product without any hagitation because they belive us and always happy to buy our product.' %}</p>
+                                <p>{% trans 'We provide the beshat they trusted us and buy our product without any hagitation because they belive us and always happy to buy.' %}</p>
+                            </div>
+                        </div>
+                        <!-- About Text End -->
+                        <!-- About Image Start -->
+                        <div class="col-lg-5 col-md-10">
+                            <div class="about-{%static 'image-wrap '%}">
+                                <img class="img-full" src="{%static 'images/product/large-size/13.jpg ' %}" alt="About Us" />
+                            </div>
+                        </div>
+                        <!-- About Image End -->
+                    </div>
+                </div>
+            </div>
+            <!-- about wrapper end -->
+            <!-- Begin Counterup Area -->
+            <div class="counterup-area">
+                <div class="container-fluid p-0">
+                    <div class="row no-gutters">
+                        <div class="col-lg-3 col-md-6">
+                            <!-- Begin Limupa Counter Area -->
+                            <div class="limupa-counter white-smoke-bg">
+                                <div class="container">
+                                    <div class="counter-img">
+                                        <img src="{%static 'images/about-us/icon/1.png ' %}" alt="">
+                                    </div>
+                                    <div class="counter-info">
+                                        <div class="counter-number">
+                                            <h3 class="counter">2169</h3>
+                                        </div>
+                                        <div class="counter-text">
+                                            <span>{% trans 'HAPPY CUSTOMERS' %}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- limupa Counter Area End Here -->
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <!-- Begin limupa Counter Area -->
+                            <div class="limupa-counter gray-bg">
+                                <div class="counter-img">
+                                    <img src="{%static 'images/about-us/icon/2.png ' %}" alt="">
+                                </div>
+                                <div class="counter-info">
+                                    <div class="counter-number">
+                                        <h3 class="counter">869</h3>
+                                    </div>
+                                    <div class="counter-text">
+                                        <span>{% trans 'AWARDS WINNED' %}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- limupa Counter Area End Here -->
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <!-- Begin limupa Counter Area -->
+                            <div class="limupa-counter white-smoke-bg">
+                                <div class="counter-img">
+                                    <img src="{%static 'images/about-us/icon/3.png ' %}" alt="">
+                                </div>
+                                <div class="counter-info">
+                                    <div class="counter-number">
+                                        <h3 class="counter">689</h3>
+                                    </div>
+                                    <div class="counter-text">
+                                        <span>{% trans 'HOURS WORKED' %}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- limupa Counter Area End Here -->
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <!-- Begin limupa Counter Area -->
+                            <div class="limupa-counter gray-bg">
+                                <div class="counter-img">
+                                    <img src="{%static 'images/about-us/icon/4.png ' %}" alt="">
+                                </div>
+                                <div class="counter-info">
+                                    <div class="counter-number">
+                                        <h3 class="counter">2169</h3>
+                                    </div>
+                                    <div class="counter-text">
+                                        <span>{% trans 'COMPLETE PROJECTS' %}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- limupa Counter Area End Here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Counterup Area End Here -->
+            <!-- team area wrapper start -->
+            <div class="team-area pt-60 pt-sm-44">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="li-section-title capitalize mb-25">
+                                <h2><span>{% trans 'our team' %}</span></h2>
+                            </div>
+                        </div>
+                    </div> <!-- section title end -->
+                    <div class="row">
+                        {% for team in teams %}
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="team-member mb-60 mb-sm-30 mb-xs-30">
+                                <div class="team-thumb">
+                                    <img src="{{ team.image.url }}" alt="Our Team Member">
+                                </div>
+                                <div class="team-content text-center">
+                                    <h3>{{ team.name }}</h3>
+                                    <p>{{ team.profession }}</p>
+                                    <a href="#">{{ team.email }}</a>
+                                    <div class="team-social">
+                                        <a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a>
+                                        <a href="https://www.twitter.com/"><i class="fa fa-twitter"></i></a>
+                                        <a href="https://www.linkedin.com/"><i class="fa fa-linkedin"></i></a>
+                                        <a href="https://www.google.com/"><i class="fa fa-google-plus"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <!-- team area wrapper end -->
+            <!-- Begin Footer Area -->
+           {% include 'layouts/footer.html' %}
+            <!-- Footer Area End Here -->
+        </div>
+        <!-- Body Wrapper End Here -->
+        <!-- jQuery-V1.12.4 -->
+        {% include 'layouts/script.html' %}
+    </body>
+
+<!-- about-us32:14-->
+</html>
